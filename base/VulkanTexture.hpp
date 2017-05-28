@@ -104,6 +104,9 @@ namespace vks
 
 			free(textureData);
 #else
+			if (!vks::tools::fileExists(filename)) {
+				vks::tools::exitFatal("Could not load texture from " + filename, "File not found");
+			}
 			gli::texture2d tex2D(gli::load(filename.c_str()));
 #endif		
 			assert(!tex2D.empty());
@@ -219,7 +222,6 @@ namespace vks
 				vks::tools::setImageLayout(
 					copyCmd,
 					image,
-					VK_IMAGE_ASPECT_COLOR_BIT,
 					VK_IMAGE_LAYOUT_UNDEFINED,
 					VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 					subresourceRange);
@@ -239,7 +241,6 @@ namespace vks
 				vks::tools::setImageLayout(
 					copyCmd,
 					image,
-					VK_IMAGE_ASPECT_COLOR_BIT,
 					VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 					imageLayout,
 					subresourceRange);
@@ -480,7 +481,6 @@ namespace vks
 			vks::tools::setImageLayout(
 				copyCmd,
 				image,
-				VK_IMAGE_ASPECT_COLOR_BIT,
 				VK_IMAGE_LAYOUT_UNDEFINED,
 				VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 				subresourceRange);
@@ -500,7 +500,6 @@ namespace vks
 			vks::tools::setImageLayout(
 				copyCmd,
 				image,
-				VK_IMAGE_ASPECT_COLOR_BIT,
 				VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 				imageLayout,
 				subresourceRange);
@@ -582,9 +581,11 @@ namespace vks
 
 			free(textureData);
 #else
+			if (!vks::tools::fileExists(filename)) {
+				vks::tools::exitFatal("Could not load texture from " + filename, "File not found");
+			}
 			gli::texture2d_array tex2DArray(gli::load(filename));
 #endif	
-
 			assert(!tex2DArray.empty());
 
 			this->device = device;
@@ -691,7 +692,6 @@ namespace vks
 			vks::tools::setImageLayout(
 				copyCmd,
 				image,
-				VK_IMAGE_ASPECT_COLOR_BIT,
 				VK_IMAGE_LAYOUT_UNDEFINED,
 				VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 				subresourceRange);
@@ -710,7 +710,6 @@ namespace vks
 			vks::tools::setImageLayout(
 				copyCmd,
 				image,
-				VK_IMAGE_ASPECT_COLOR_BIT,
 				VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 				imageLayout,
 				subresourceRange);
@@ -791,6 +790,9 @@ namespace vks
 
 			free(textureData);
 #else
+			if (!vks::tools::fileExists(filename)) {
+				vks::tools::exitFatal("Could not load texture from " + filename, "File not found");
+			}
 			gli::texture_cube texCube(gli::load(filename));
 #endif	
 			assert(!texCube.empty());
@@ -902,7 +904,6 @@ namespace vks
 			vks::tools::setImageLayout(
 				copyCmd,
 				image,
-				VK_IMAGE_ASPECT_COLOR_BIT,
 				VK_IMAGE_LAYOUT_UNDEFINED,
 				VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 				subresourceRange);
@@ -921,7 +922,6 @@ namespace vks
 			vks::tools::setImageLayout(
 				copyCmd,
 				image,
-				VK_IMAGE_ASPECT_COLOR_BIT,
 				VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 				imageLayout,
 				subresourceRange);
